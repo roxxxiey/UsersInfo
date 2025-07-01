@@ -47,6 +47,13 @@ main/
 └── AndroidManifest.xml                 # Определяет разрешения и регистрирует активности приложения
 ```
 
+## Скриншоты
+
+<p align="center">
+  <img src="res/drawable/mainActivity.png" alt="Главная активность" width="300"/>
+  <img src="res/drawable/detailActivity.png" alt="Детальная активность" width="300"/>
+</p>
+
 ## Запуск проекта
 1. Клонировать репозиторий: ``` git clone https://github.com/roxxxiey/UsersInfo ```
 2. Открыть проект в Android Studio.
