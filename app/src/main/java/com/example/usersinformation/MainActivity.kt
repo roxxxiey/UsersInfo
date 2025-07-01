@@ -3,8 +3,10 @@ package com.example.usersinformation
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.usersinformation.dataBase.AppDatabase
 import com.example.usersinformation.dataBase.UserDao
 import com.example.usersinformation.dataBase.UserEntity
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = RecycleViewAdapter(mutableListOf()) { user ->
-            // Запуск Activity с детальной информацией
             val intent = Intent(this, UserDetailActivity::class.java).apply {
                 putExtra("USER", user)
             }
@@ -51,12 +53,28 @@ class MainActivity : AppCompatActivity() {
             val savedUsers = withContext(Dispatchers.IO) {
                 userDao.getAll().map { it.toApiUser() }
             }
-
             if (savedUsers.isNotEmpty()) {
                 adapter.updateUsers(savedUsers)
             }
+        }
 
+        findViewById<AppCompatButton>(R.id.addNewUsers).setOnClickListener {
             loadUsersFromApi()
+        }
+
+        findViewById<AppCompatButton>(R.id.deleteData).setOnClickListener {
+            lifecycleScope.launch {
+                try {
+                    userDao.clearAll()
+                    Toast.makeText(this@MainActivity, "Все данные удалены", Toast.LENGTH_SHORT).show()
+
+                    val newList = userDao.getAll().map { it.toApiUser() }
+                    adapter.updateUsers(newList)
+
+                } catch (e: Exception) {
+                    Toast.makeText(this@MainActivity, "Ошибка при удалении данных: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -69,77 +87,29 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val apiUsers = response.body()?.results ?: emptyList()
 
+                    if (apiUsers.isEmpty()) {
+                        Log.e("MainActivity", "Получен пустой список пользователей")
+                        Toast.makeText(this@MainActivity, "Получен пустой список пользователей", Toast.LENGTH_LONG).show()
+                    }
+
                     withContext(Dispatchers.IO) {
-                        userDao.clearAll()
                         userDao.insertAll(apiUsers.map { UserEntity.fromApiUser(it) })
                     }
-                    adapter.updateUsers(apiUsers)
+
+                    val allUsers = withContext(Dispatchers.IO) {
+                        userDao.getAll().map { it.toApiUser() }
+                    }
+                    adapter.updateUsers(allUsers)
+
                 } else {
                     Log.e("MainActivity", "Ошибка API: ${response.code()}")
-                    showTestData()
+                    Toast.makeText(this@MainActivity, "Ошибка API: код ${response.code()}", Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
                 Log.e("MainActivity", "Ошибка при загрузке: ${e.message}", e)
-                showTestData()
+                Toast.makeText(this@MainActivity, "Ошибка загрузки: ${e.localizedMessage ?: "Неизвестная ошибка"}", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun showTestData() {
-        val users = listOf(
-            ApiUser(
-                gender = "male",
-                name = ApiUser.Name("Mr", "Иван", "Иванов"),
-                location = ApiUser.Location(
-                    street = ApiUser.Street(123, "Main St"),
-                    city = "Moscow",
-                    state = "Moscow",
-                    country = "Russia",
-                    postcode = "123456",
-                    coordinates = ApiUser.Coordinates("55.75", "37.61"),
-                    timezone = ApiUser.Timezone("+3", "Moscow")
-                ),
-                email = "ivan@example.com",
-                login = ApiUser.Login("uuid", "ivanov", "password", "salt", "md5", "sha1", "sha256"),
-                dob = ApiUser.Dob("1990-01-01", 33),
-                registered = ApiUser.Registered("2020-01-01", 3),
-                phone = "+7 (123) 456-7890",
-                cell = "+7 (987) 654-3210",
-                id = ApiUser.Id("passport", "123456789"),
-                picture = ApiUser.Picture(
-                    "https://randomuser.me/api/portraits/men/1.jpg",
-                    "https://randomuser.me/api/portraits/men/1.jpg",
-                    "https://randomuser.me/api/portraits/men/1.jpg"
-                ),
-                nat = "RU"
-            ),
-            ApiUser(
-                gender = "male",
-                name = ApiUser.Name("Mr", "Иван", "Иванов"),
-                location = ApiUser.Location(
-                    street = ApiUser.Street(123, "Main St"),
-                    city = "Moscow",
-                    state = "Moscow",
-                    country = "Russia",
-                    postcode = "123456",
-                    coordinates = ApiUser.Coordinates("55.75", "37.61"),
-                    timezone = ApiUser.Timezone("+3", "Moscow")
-                ),
-                email = "ivan@example.com",
-                login = ApiUser.Login("uuid", "ivanov", "password", "salt", "md5", "sha1", "sha256"),
-                dob = ApiUser.Dob("1990-01-01", 33),
-                registered = ApiUser.Registered("2020-01-01", 3),
-                phone = "+7 (123) 456-7890",
-                cell = "+7 (987) 654-3210",
-                id = ApiUser.Id("passport", "123456789"),
-                picture = ApiUser.Picture(
-                    "https://randomuser.me/api/portraits/men/1.jpg",
-                    "https://randomuser.me/api/portraits/men/1.jpg",
-                    "https://randomuser.me/api/portraits/men/1.jpg"
-                ),
-                nat = "RU"
-            )
-        ).toMutableList()
-        adapter.updateUsers(users)
-    }
 }

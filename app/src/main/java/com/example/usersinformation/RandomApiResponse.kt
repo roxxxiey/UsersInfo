@@ -97,10 +97,10 @@ data class ApiUser(
 
     @Parcelize
     data class Id(
-        val name: String,
-        val value: String
-    ):Parcelable{
-        fun getId() = "$name $value"
+        val name: String?,
+        val value: String?
+    ): Parcelable {
+        fun getId() = "${name.orEmpty()} ${value.orEmpty()}"
     }
 
     @Parcelize

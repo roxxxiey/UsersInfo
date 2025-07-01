@@ -1,9 +1,14 @@
 package com.example.usersinformation
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.usersinformation.databinding.ActivityUserDetailBinding
 
@@ -15,25 +20,31 @@ class UserDetailActivity : AppCompatActivity() {
         binding = ActivityUserDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         val user = intent.getParcelableExtra<ApiUser>("USER")
         if (user != null){
 
-            binding.detailGender.text = user.gender
-            binding.detailName.text = user.name.getFullName()
-            binding.detailLocation.text = user.location.getLocation()
-            binding.detailEmail.text = user.email
-            binding.detailLogin.text = user.login.getLogin()
-            binding.detailDOB.text = user.dob.date
-            binding.detailRegistred.text = user.registered.getRegistred()
-            binding.detailTelephone.text = user.phone
-            binding.detailCell.text = user.cell
-            binding.detailId.text = user.id.getId()
+            setTextIfValid(user.gender, binding.detailGender, "gender")
+            setTextIfValid(user.name?.getFullName(), binding.detailName, "name")
+            setTextIfValid(user.location?.getLocation(), binding.detailLocation, "location")
+            setTextIfValid(user.email, binding.detailEmail, "email")
+            setTextIfValid(user.login?.getLogin(), binding.detailLogin, "login")
+            setTextIfValid(user.dob.date, binding.detailDOB, "date of birthday")
+            setTextIfValid(user.registered?.getRegistred(), binding.detailRegistred, "registered")
+            setTextIfValid(user.phone, binding.detailTelephone, "phone")
+            setTextIfValid(user.cell, binding.detailCell, "cell")
+            setTextIfValid(user.id?.getId(), binding.detailId, "id")
+            setTextIfValid(user.nat, binding.detailNationality, "nationality")
+
             Glide.with(this)
-                .load(user.picture.medium)
+                .load(user.picture.large)
                 .circleCrop()
                 .into(binding.detailAvatar)
-            binding.detailNationality.text = user.nat
-
 
             binding.detailEmail.setOnClickListener {
                 val intent = Intent(Intent.ACTION_SENDTO).apply {
@@ -52,8 +63,32 @@ class UserDetailActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
+
+            val lat = user.location.coordinates.latitude
+            val lon = user.location.coordinates.longitude
+            val geoUri = Uri.parse("geo:$lat,$lon?q=$lat,$lon(${Uri.encode("User Location")})")
+
+            binding.detailLocation.setOnClickListener{
+                val intent = Intent(Intent.ACTION_VIEW,geoUri)
+                if (intent.resolveActivity(packageManager)!=null){
+                    startActivity(intent)
+                }
+            }
         }else{
             finish()
+        }
+    }
+
+    private fun showMissingIdWarning(value: String) {
+        Toast.makeText(this, "У пользователя отсутствует: $value", Toast.LENGTH_LONG).show()
+    }
+
+    private fun setTextIfValid(value: String?, textView: TextView, fieldName: String) {
+        if (value.isNullOrBlank()) {
+            showMissingIdWarning(fieldName)
+        } else {
+            textView.text = value
+            textView.setTextColor(Color.BLACK)
         }
     }
 }

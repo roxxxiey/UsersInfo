@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/avatarCard"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mickel Lebovsky Junior"
-            android:layout_marginLeft="10sp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintStart_toEndOf="@+id/avatarCard"
             app:layout_constraintTop_toTopOf="@+id/avatarCard" />
 
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email address"
-            android:layout_marginLeft="10sp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toTopOf="@+id/Telephone"
             app:layout_constraintStart_toEndOf="@+id/avatarCard"
             app:layout_constraintTop_toBottomOf="@+id/NameAndSurname" />
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Telephone number"
-            android:layout_marginLeft="10sp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/avatarCard"
             app:layout_constraintStart_toEndOf="@+id/avatarCard"
 />

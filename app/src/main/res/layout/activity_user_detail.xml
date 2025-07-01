@@ -12,111 +12,123 @@
         android:id="@+id/detailAvatar"
         android:layout_width="160sp"
         android:layout_height="160sp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/detailName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailAvatar"
-        app:layout_constraintTop_toTopOf="@+id/detailAvatar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailAvatar">
 
-    <TextView
-        android:id="@+id/detailId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="ID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/detailName" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/detailDOB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Date of Birthday"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/detailId" />
+            <TextView
+                android:id="@+id/detailName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not Name"
+                android:textColor="@color/red"/>
 
-    <TextView
-        android:id="@+id/detailGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Gender"
-        app:layout_constraintStart_toStartOf="@+id/detailAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/detailAvatar" />
+            <TextView
+                android:id="@+id/detailId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
+                android:text="Not ID"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/red"/>
 
-    <TextView
-        android:id="@+id/detailEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="UserEmail"
-        app:layout_constraintStart_toStartOf="@+id/detailGender"
-        app:layout_constraintTop_toBottomOf="@+id/detailGender" />
+            <TextView
+                android:id="@+id/detailDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not Date of Birthday"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/red"/>
 
-    <TextView
-        android:id="@+id/detailTelephone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Telephone Number"
-        app:layout_constraintStart_toStartOf="@+id/detailEmail"
-        app:layout_constraintTop_toBottomOf="@+id/detailEmail" />
+            <TextView
+                android:id="@+id/detailGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Not Gender"
+                android:textColor="@color/red"/>
 
-    <TextView
-        android:id="@+id/detailNationality"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Nationality"
-        app:layout_constraintStart_toStartOf="@+id/detailTelephone"
-        app:layout_constraintTop_toBottomOf="@+id/detailTelephone" />
+            <TextView
+                android:id="@+id/detailEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Not UserEmail"
+                android:textColor="@color/red"/>
 
-    <TextView
-        android:id="@+id/detailLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Location"
-        app:layout_constraintStart_toStartOf="@+id/detailNationality"
-        app:layout_constraintTop_toBottomOf="@+id/detailNationality" />
+            <TextView
+                android:id="@+id/detailTelephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Not Telephone Number"
+                android:textColor="@color/red"/>
 
-    <TextView
-        android:id="@+id/detailLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Login detail"
-        app:layout_constraintStart_toStartOf="@+id/detailLocation"
-        app:layout_constraintTop_toBottomOf="@+id/detailLocation" />
+            <TextView
+                android:id="@+id/detailNationality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Not Nationality"
+                android:textColor="@color/red"/>
 
-    <TextView
-        android:id="@+id/detailRegistred"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Registred"
-        app:layout_constraintStart_toStartOf="@+id/detailLogin"
-        app:layout_constraintTop_toBottomOf="@+id/detailLogin" />
+            <TextView
+                android:id="@+id/detailLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:singleLine="false"
+                android:text="Not Location"
+                android:textColor="@color/red"/>
 
-    <TextView
-        android:id="@+id/detailCell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Call"
-        app:layout_constraintStart_toStartOf="@+id/detailRegistred"
-        app:layout_constraintTop_toBottomOf="@+id/detailRegistred" />
+            <TextView
+                android:id="@+id/detailLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Not Login detail"
+                android:textColor="@color/red"/>
+
+            <TextView
+                android:id="@+id/detailRegistred"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Not Registred Null"
+                android:textColor="@color/red"/>
+
+            <TextView
+                android:id="@+id/detailCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Not Call"
+                android:textColor="@color/red"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

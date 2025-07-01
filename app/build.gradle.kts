@@ -36,9 +36,16 @@ android {
         jvmTarget = "11"
     }
 
-    // ViewBinding
     buildFeatures {
         viewBinding = true
+    }
+
+    kapt {
+        correctErrorTypes = true
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas")
+            arg("room.incremental", "true")
+        }
     }
 
 
@@ -66,12 +73,12 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    kapt ("com.github.bumptech.glide:compiler:4.16.0")
 
     implementation ("androidx.core:core-ktx:1.12.0")
 
-    implementation ("androidx.room:room-runtime:2.4.0")
-    kapt ("androidx.room:room-compiler:2.4.0")
-    implementation ("androidx.room:room-ktx:2.4.0")
+    implementation ("androidx.room:room-runtime:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
 
 }
