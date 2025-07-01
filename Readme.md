@@ -79,9 +79,7 @@ main/
 ## Разрешения
 ``` <uses-permission android:name="android.permission.INTERNET"/>```
 
-## Скачать APK
-
-[Скачать APK](DownloadAPK)
+## [Скачать APK](DownloadAPK)
 
 ## Автор
 Донела Алексей (https://github.com/roxxxiey)
