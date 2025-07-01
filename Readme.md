@@ -31,9 +31,9 @@ main/
 │        ├── AppGlideModule.kt          # Glide-модуль
 │        ├── UserDetailActivity.kt      # Активность для детальногоо просмотра информации о пользователе
 │        └── dataBase/
-│            ├── AppDatabase.kt         # Singleton база данных Room
-│            ├── UserDao.kt             # Интерфейс доступа к данным (DAO)
-│            └── UserEntity.kt          # Сущность пользователя в БД
+│            ├── Room.kt                # Singleton база данных Room
+│            ├── DAO.kt                 # Интерфейс доступа к данным (DAO)
+│            └── Entity.kt              # Сущность пользователя в БД
 ├── res/
 │    ├── layout/
 │    │   ├── activity_main.xml
