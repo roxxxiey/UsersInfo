@@ -50,8 +50,8 @@ main/
 ## Скриншоты
 
 <p align="center">
-  <img src="app/src/main/res/drawable/mainActivity.png" alt="Главная активность" width="300"/>
-  <img src="app/src/main/res/drawable/detailActivity.png" alt="Детальная активность" width="300"/>
+  <img src="app/src/main/res/drawable/mainactivity.png" alt="Главная активность" width="300"/>
+  <img src="app/src/main/res/drawable/detailactivity.png" alt="Детальная активность" width="300"/>
 </p>
 
 ## Запуск проекта
@@ -78,6 +78,10 @@ main/
 
 ## Разрешения
 ``` <uses-permission android:name="android.permission.INTERNET"/>```
+
+## Скачать APK
+
+[Скачать APK](DownloadAPK/app-debug.apk)
 
 ## Автор
 Донела Алексей (https://github.com/roxxxiey)
