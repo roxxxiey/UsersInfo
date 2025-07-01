@@ -49,10 +49,8 @@ main/
 
 ## Скриншоты
 
-<p align="center">
-  <img src="res/drawable/mainActivity.png" alt="Главная активность" width="300"/>
-  <img src="res/drawable/detailActivity.png" alt="Детальная активность" width="300"/>
-</p>
+![Главная активность](res/drawable/mainActivity.png)
+![Детальная активность](res/drawable/detailActivity.png)
 
 ## Запуск проекта
 1. Клонировать репозиторий: ``` git clone https://github.com/roxxxiey/UsersInfo ```
