@@ -81,7 +81,7 @@ main/
 
 ## Скачать APK
 
-[Скачать APK](DownloadAPK/app-debug.apk)
+[Скачать APK](DownloadAPK)
 
 ## Автор
 Донела Алексей (https://github.com/roxxxiey)
