@@ -70,12 +70,14 @@ class MainActivity : AppCompatActivity() {
                 try {
                     userDao.clearAll()
                     Toast.makeText(this@MainActivity, "Все данные удалены", Toast.LENGTH_SHORT).show()
+                    Log.d("MainActivity", "All data deleted")
 
                     val newList = userDao.getAll().map { it.toApiUser() }
                     adapter.updateUsers(newList)
 
                 } catch (e: Exception) {
                     Toast.makeText(this@MainActivity, "Ошибка при удалении данных: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("MainActivity", "Error deleting data: ${e.message}", e)
                 }
             }
         }
