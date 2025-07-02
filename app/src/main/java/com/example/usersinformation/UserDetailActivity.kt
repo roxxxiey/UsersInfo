@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -52,6 +53,9 @@ class UserDetailActivity : AppCompatActivity() {
                 }
                 if (intent.resolveActivity(packageManager) != null) {
                     startActivity(intent)
+                }else{
+                    Toast.makeText(this@UserDetailActivity,"Почтовый клиент не найден", Toast.LENGTH_LONG).show()
+                    Log.d("IntentCheck", "Email resolved: ${intent.resolveActivity(packageManager)}")
                 }
             }
 
@@ -61,6 +65,9 @@ class UserDetailActivity : AppCompatActivity() {
                 }
                 if (intent.resolveActivity(packageManager) != null) {
                     startActivity(intent)
+                }else{
+                    Toast.makeText(this@UserDetailActivity,"Ошибка при переходе в набор номера", Toast.LENGTH_LONG).show()
+                    Log.d("IntentCheck", "Telephone resolved: ${intent.resolveActivity(packageManager)}")
                 }
             }
 
@@ -72,6 +79,19 @@ class UserDetailActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_VIEW,geoUri)
                 if (intent.resolveActivity(packageManager)!=null){
                     startActivity(intent)
+                }
+                else{
+                    Toast.makeText(this@UserDetailActivity,"Клиент для карт не найден", Toast.LENGTH_LONG).show()
+                    Log.d("IntentCheck", "Geo intent resolved: ${intent.resolveActivity(packageManager)}")
+                    Log.d("IntentCheck", "Geo intent alternative version run")
+                    val gmmIntentUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=$lat,$lon")
+                    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                    mapIntent.setPackage("com.google.android.apps.maps")
+                    if (mapIntent.resolveActivity(packageManager) != null) {
+                        startActivity(mapIntent)
+                    } else {
+                        Toast.makeText(this, "Google Maps не установлены", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }else{
