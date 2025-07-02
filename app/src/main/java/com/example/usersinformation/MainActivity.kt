@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         val recyclerView = binding.usersList
+        recyclerView.setHasFixedSize(true)
+        recyclerView.setItemViewCacheSize(20)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = RecycleViewAdapter(mutableListOf()) { user ->
