@@ -19,7 +19,7 @@ import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: RecycleViewAdapter
-    private val apiService = RandomApiService.create()
+    private val apiService = ApiClient.api
     private lateinit var db: AppDatabase
     private lateinit var userDao: UserDao
     private lateinit var binding: ActivityMainBinding
@@ -82,14 +82,14 @@ class MainActivity : AppCompatActivity() {
     private fun loadUsersFromApi() {
         lifecycleScope.launch {
             try {
-                Log.d("MainActivity", "Загрузка пользователей...")
+                Log.d("MainActivity", "Loading users...")
                 val response = apiService.getUsers()
 
                 if (response.isSuccessful) {
                     val apiUsers = response.body()?.results ?: emptyList()
 
                     if (apiUsers.isEmpty()) {
-                        Log.e("MainActivity", "Получен пустой список пользователей")
+                        Log.e("MainActivity", "Empty user list received")
                         Toast.makeText(this@MainActivity, "Получен пустой список пользователей", Toast.LENGTH_LONG).show()
                     }
 
@@ -103,11 +103,11 @@ class MainActivity : AppCompatActivity() {
                     adapter.updateUsers(allUsers)
 
                 } else {
-                    Log.e("MainActivity", "Ошибка API: ${response.code()}")
+                    Log.e("MainActivity", "Error API: ${response.code()}")
                     Toast.makeText(this@MainActivity, "Ошибка API: код ${response.code()}", Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
-                Log.e("MainActivity", "Ошибка при загрузке: ${e.message}", e)
+                Log.e("MainActivity", "Error loading: ${e.message}", e)
                 Toast.makeText(this@MainActivity, "Ошибка загрузки: ${e.localizedMessage ?: "Неизвестная ошибка"}", Toast.LENGTH_LONG).show()
             }
         }
