@@ -47,7 +47,7 @@ main/
 └── AndroidManifest.xml                 # Определяет разрешения и регистрирует активности приложения
 ```
 
-## Скриншоты
+## Demo работы приложения
 
 <p align="center">
   <img src="app/src/main/res/drawable/pref.gif" alt="Демонстрация работы" width="300"/>
