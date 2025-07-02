@@ -52,8 +52,9 @@ main/
 <p align="center">
   <img src="app/src/main/res/drawable/mainactivity.png" alt="Главная активность" width="300"/>
   <img src="app/src/main/res/drawable/detailactivity.png" alt="Детальная активность" width="300"/>
-  <video src="app/src/main/res/drawable/pref.mp4" alt = "Пример работы" width="300"></video>
 </p>
+
+![Demo](app/src/main/res/drawable/pref.gif)
 
 ## Запуск проекта
 1. Клонировать репозиторий: ``` git clone https://github.com/roxxxiey/UsersInfo ```
